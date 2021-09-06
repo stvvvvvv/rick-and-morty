@@ -17,6 +17,9 @@ export default createStore({
         .then((response) => {
           commit('SET_CHARACTERS', response.data)
         })
+        .catch(e => {
+          console.log(e)
+        })
     }
   },
   getters: {
