@@ -28,7 +28,16 @@ export default {
 </script>
 
 <style lang="scss">
-.img{
-  width: 500px;
+.characters-list{
+  &__container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 </style>
