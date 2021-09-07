@@ -7,6 +7,13 @@
           :characterData="character"
         />
       </div>
+      <div
+        class="scroll-trigger"
+        id="scrollTrigger"
+        ref="infinitescrolltrigger"
+      >
+        <i class="fas fa-spinner fa-spin scroll-trigger__icon"></i>
+      </div>
     </div>
 </template>
 
@@ -19,6 +26,9 @@ export default {
   name: 'CharactersList',
   data () {
     return {
+      apiUrl: 'https://rickandmortyapi.com/api/character',
+      currentUrl: '',
+      nextUrl: '',
       charactersData: {}
     }
   },
@@ -26,14 +36,37 @@ export default {
   props: {
   },
   methods: {
+    getCharacters () {
+      axios
+        .get(this.currentUrl)
+        .then(response => (this.charactersData = response.data))
+        .then((data) => {
+          this.nextUrl = data.info.next
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    scrollTrigger () {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.intersectionRatio > 0 && this.nextUrl) {
+            this.next()
+          }
+        })
+      })
+      observer.observe(this.$refs.infinitescrolltrigger)
+    },
+    next () {
+      this.currentUrl = this.nextUrl
+      this.getPokemons()
+    }
   },
   mounted () {
-    axios
-      .get('https://rickandmortyapi.com/api/character')
-      .then(response => (this.charactersData = response.data))
-      .catch(e => {
-        console.log(e)
-      })
+  },
+  created () {
+    this.currentUrl = this.apiUrl
+    this.getCharacters()
   }
 }
 </script>
@@ -49,6 +82,15 @@ export default {
     margin-right: auto;
     padding-left: 16px;
     padding-right: 16px;
+  }
+}
+.scroll-trigger{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  &__icon{
+    font-size: 50px;
   }
 }
 </style>
