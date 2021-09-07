@@ -48,7 +48,7 @@ export default {
   &__wrapper{
     display: flex;
     width: 600px;
-    height: 220px;
+    height: 230px;
     background-color: #3c3e44;
     margin: 10px;
     border-radius: 1rem;
@@ -56,7 +56,7 @@ export default {
   }
   &__img{
     width: auto;
-    max-height: 220px;
+    max-height: 230px;
     border-radius: 1rem 0 0 1rem;
   }
   &__section{
@@ -69,19 +69,31 @@ export default {
   }
   &__status{
     font-weight: bold;
+    &::first-letter{
+      text-transform: uppercase;
+    }
   }
   &__last-locaction{
     font-weight: bold;
+    &::first-letter{
+      text-transform: uppercase;
+    }
     &_data{
       margin-top: 5px;
       color: #949494;
+      &::first-letter{
+      text-transform: uppercase;
+    }
     }
   }
   &__first{
     font-weight: bold;
    &_data{
-     margin-top: 5px;
+      margin-top: 5px;
       color: #949494;
+      &::first-letter{
+      text-transform: uppercase;
+    }
    }
   }
   &__btn{
