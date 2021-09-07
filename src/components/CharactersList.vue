@@ -13,16 +13,27 @@
 <script>
 import CharacterCart from '@/components/CharacterCart'
 
+import axios from 'axios'
+
 export default {
   name: 'CharactersList',
+  data () {
+    return {
+      charactersData: {}
+    }
+  },
   components: { CharacterCart },
   props: {
-    charactersData: {
-      type: Object,
-      default () {
-        return {}
-      }
-    }
+  },
+  methods: {
+  },
+  mounted () {
+    axios
+      .get('https://rickandmortyapi.com/api/character')
+      .then(response => (this.charactersData = response.data))
+      .catch(e => {
+        console.log(e)
+      })
   }
 }
 </script>
